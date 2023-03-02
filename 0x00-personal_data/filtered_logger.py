@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-""" Obfuscated personal data """
+""" Obfuscated personal data, done by filter_datum"""
 import re
 
 
 def filter_datum(fields, redaction, message, separator):
-    """ Obfuscated personal data """
+    """ Obfuscated personal data is obtained from this function"""
     combo = "(?<=" + f"=)[^{separator}]*|(?<=" \
             .join(fields) + f"=)[^{separator}]*"
     return(re.sub(combo, '{}'.format(redaction), message))
