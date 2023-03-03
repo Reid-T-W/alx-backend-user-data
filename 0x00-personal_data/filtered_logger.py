@@ -2,6 +2,7 @@
 """ Obfuscated personal data, done by filter_datum"""
 import re
 import logging
+PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
 
 
 def filter_datum(fields: str, redaction: str, message: str,
@@ -10,6 +11,17 @@ def filter_datum(fields: str, redaction: str, message: str,
     combo = "(?<=" + f"=)[^{separator}]*|(?<=" \
             .join(fields) + f"=)[^{separator}]*"
     return(re.sub(combo, '{}'.format(redaction), message))
+
+
+def get_logger() -> logging.Logger:
+    """ Creates a logger """
+    user_data = logging.getLogger(user_data)
+    user_data.setLevel(level=logging.INFO)
+    stream_handler = logging.StreamHandler()
+    # Attaching our custom formatter to the stream handler
+    stream_handler.setFormatter(RedactingFormatter(fields=PII_FIELDS))
+    user_data.addHandler(stream_handler)
+    return(user_data)
 
 
 class RedactingFormatter(logging.Formatter):
