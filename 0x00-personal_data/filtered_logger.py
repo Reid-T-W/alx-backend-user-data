@@ -6,8 +6,8 @@ from typing import List
 PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
 
 
-def filter_datum(fields: List[str], redaction: any,
-                 message: any, separator: any) -> any:
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """ Obfuscated personal data is obtained from this function"""
     combo = "(?<=" + f"=)[^{separator}]*|(?<=" \
             .join(fields) + f"=)[^{separator}]*"
