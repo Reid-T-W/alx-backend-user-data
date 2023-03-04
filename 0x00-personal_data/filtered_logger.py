@@ -19,6 +19,7 @@ def get_logger() -> logging.Logger:
     user_data = logging.getLogger('user_data')
     user_data.setLevel(level=logging.INFO)
     stream_handler = logging.StreamHandler()
+    stream_handler.setLevel(logging.INFO)
     # Attaching our custom formatter to the stream handler
     stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
     user_data.addHandler(stream_handler)
