@@ -16,7 +16,7 @@ def filter_datum(fields: List[str], redaction: str,
 
 def get_logger() -> logging.Logger:
     """ Creates a logger """
-    user_data = logging.getLogger(user_data)
+    user_data = logging.getLogger('user_data')
     user_data.setLevel(level=logging.INFO)
     stream_handler = logging.StreamHandler()
     # Attaching our custom formatter to the stream handler
