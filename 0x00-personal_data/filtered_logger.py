@@ -44,17 +44,19 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     return conn
 
 
-# def main():
-#     # Getting the logger
-#     logger = get_logger()
-#     # Getting the connection object
-#     con = get_db()
-#     cursor = con.cursor()
-#     query = ("SELECT * FROM users")
-#     cursor.execute(query)
-#     for item in cursor:
-#         print(item)
-#         # logger.info(str(item))
+def main():
+    # Getting the logger
+    logger = get_logger()
+    # Getting the connection object
+    con = get_db()
+    cursor = con.cursor()
+    query = ("SELECT * FROM users")
+    cursor.execute(query)
+    for item in cursor:
+        logger.info('name={}; email={}; phone={}; ssn={}; password={};'
+                    'ip={}; last_login={}; user_agent={};'.
+                    format(item[0], item[1], item[2], item[3],
+                           item[4], item[5], item[6], item[7]))
 
 
 class RedactingFormatter(logging.Formatter):
@@ -76,5 +78,5 @@ class RedactingFormatter(logging.Formatter):
         return (super(RedactingFormatter, self).format(record))
 
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
