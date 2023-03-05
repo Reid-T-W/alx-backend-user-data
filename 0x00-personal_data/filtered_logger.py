@@ -5,7 +5,7 @@ import logging
 from typing import List
 import os
 import mysql.connector
-PII_FIELDS = ("name", "email", "phone", "ssn", "ip")
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 def filter_datum(fields: List[str], redaction: str,
@@ -38,8 +38,23 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     conn = mysql.connector.connect(user=username,
                                    password=password,
                                    host=host,
-                                   database=database)
+                                   database=database,
+                                   auth_plugin='mysql_native_password')
+
     return conn
+
+
+# def main():
+#     # Getting the logger
+#     logger = get_logger()
+#     # Getting the connection object
+#     con = get_db()
+#     cursor = con.cursor()
+#     query = ("SELECT * FROM users")
+#     cursor.execute(query)
+#     for item in cursor:
+#         print(item)
+#         # logger.info(str(item))
 
 
 class RedactingFormatter(logging.Formatter):
@@ -59,3 +74,7 @@ class RedactingFormatter(logging.Formatter):
         record.msg = filter_datum(self.fields, self.REDACTION,
                                   record.msg, self.SEPARATOR)
         return (super(RedactingFormatter, self).format(record))
+
+
+# if __name__ == '__main__':
+#     main()
