@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Obfuscated personal data, done by filter_datum"""
 import re
 import logging
