@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """ Obfuscated personal data, done by filter_datum"""
 import re
 import logging
@@ -38,7 +38,8 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
     conn = mysql.connector.connect(user=username,
                                    password=password,
                                    host=host,
-                                   database=database)
+                                   database=database,
+                                   auth_plugin='mysql_native_password')
     return conn
 
 
