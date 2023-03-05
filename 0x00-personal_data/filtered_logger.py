@@ -45,6 +45,7 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
 
 
 def main():
+    """ Log data from database """
     # Getting the logger
     logger = get_logger()
     # Getting the connection object
