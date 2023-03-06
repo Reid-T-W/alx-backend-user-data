@@ -39,7 +39,9 @@ def forbidden(error) -> str:
 
 
 @app.before_request
-def handle_before_request():
+def handle_before_request() -> None:
+    """Run before every request
+    """
     excluded_path = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None:
         pass
