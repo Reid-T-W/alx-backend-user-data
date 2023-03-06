@@ -31,6 +31,7 @@ def unauthorized(error) -> str:
     """
     return jsonify({"error": "Unauthorized"}), 401
 
+
 @app.errorhandler(403)
 def forbidden(error) -> str:
     """Unauthenticated user
@@ -42,15 +43,17 @@ def forbidden(error) -> str:
 def handle_before_request() -> None:
     """Run before every request
     """
-    excluded_path = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    excluded_path = ['/api/v1/status/', '/api/v1/unauthorized/',
+                     '/api/v1/forbidden/']
     if auth is None:
         pass
-    if auth.require_auth(request.path, excluded_path):
+    if auth.require_auth(request.path, excluded_path) is False:
         pass
-    if auth.authorization_header(request) is None:
-        abort(401)
-    if auth.current_user(request) is None:
-        abort(403)
+    else:
+        if auth.authorization_header(request) is None:
+            abort(401)
+        if auth.current_user(request) is None:
+            abort(403)
 
 
 if __name__ == "__main__":
