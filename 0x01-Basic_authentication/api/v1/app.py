@@ -58,7 +58,7 @@ def handle_before_request() -> None:
                 abort(401)
             if auth.current_user(request) is None:
                 abort(403)
-    except Exception:
+    except AttributeError:
         pass
 
 
