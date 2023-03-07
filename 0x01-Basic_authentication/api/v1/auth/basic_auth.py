@@ -38,7 +38,8 @@ class BasicAuth(Auth):
         try:
             decoded_auth_header = base64.b64decode(base64_authorization_header)
             return decoded_auth_header.decode('utf-8')
-        except base64.binascii.Error:
+        # except base64.binascii.Error:
+        except Exception:
             return None
 
     def extract_user_credentials(self,
@@ -53,10 +54,19 @@ class BasicAuth(Auth):
             return (None, None)
         if re.search(':', decoded_base64_authorization_header) is None:
             return (None, None)
-        email = re.match('.*(?=:)',
-                         decoded_base64_authorization_header).group(0)
-        password = re.search('(?<=:).*',
-                             decoded_base64_authorization_header).group(0)
+
+        # Password that includes a : is not supported
+
+        # email = re.match('.*(?=:)',
+        #                  decoded_base64_authorization_header).group(0)
+        # password = re.search('(?<=:).*',
+        #                      decoded_base64_authorization_header).group(0)
+
+        # Password that includes a : is supported
+
+        credentials = decoded_base64_authorization_header.split(':')
+        email = credentials.pop(0)
+        password = ":".join(credentials)
         return(email, password)
 
     def user_object_from_credentials(self,
