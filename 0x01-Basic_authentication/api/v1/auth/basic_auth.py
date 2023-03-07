@@ -18,5 +18,7 @@ class BasicAuth(Auth):
         if not isinstance(authorization_header, str):
             return None
         # Checking if the authorization_header starts with the word basic
-        if re.match(r'basic .*', authorization_header):
-            pass
+        if re.match(r'Basic .*', authorization_header) is None:
+            return None
+        # Returning the value after basic
+        return (re.search(r'(?<=Basic ).*', authorization_header).group(0))
