@@ -50,13 +50,16 @@ def handle_before_request() -> None:
                      '/api/v1/forbidden/']
     if auth is None:
         pass
-    if auth.require_auth(request.path, excluded_path) is False:
+    try:
+        if auth.require_auth(request.path, excluded_path) is False:
+            pass
+        else:
+            if auth.authorization_header(request) is None:
+                abort(401)
+            if auth.current_user(request) is None:
+                abort(403)
+    except Exception:
         pass
-    else:
-        if auth.authorization_header(request) is None:
-            abort(401)
-        if auth.current_user(request) is None:
-            abort(403)
 
 
 if __name__ == "__main__":
