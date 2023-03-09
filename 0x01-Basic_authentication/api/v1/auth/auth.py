@@ -28,10 +28,12 @@ class Auth():
             if excluded_path[-1] == '*':
                 excluded_path = excluded_path[:-1]
             match = re.match(excluded_path, path)
-            if match is None:
-                return True
-            else:
+            # The case where a match is found.
+            # The path has been found in the excluded list
+            # Hence, authentication is not required
+            if match is not None:
                 return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """ Handles the authorization header """
