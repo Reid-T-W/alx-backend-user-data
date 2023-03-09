@@ -57,9 +57,6 @@ def handle_before_request() -> None:
         if auth.require_auth(request.path, excluded_path) is False:
             pass
         else:
-            # if auth.authorization_header(request) is None and \
-            #    auth.session_cookie(request) is None:
-            #     abort(401)
             request.current_user = auth.current_user(request)
             if auth.authorization_header(request) is None and \
                auth.session_cookie(request) is None:
