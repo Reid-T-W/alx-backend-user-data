@@ -16,10 +16,8 @@ class SessionDBAuth(SessionExpAuth):
 
     def user_id_for_session_id(self, session_id=None):
         """ Overriding user_id_for_session_id"""
-        ...
         user_id = super(session_id)
 
     def destroy_session(self, request=None):
         """ Overridingdestroy_session """
-        ...
         destroyed_session = super(request)
