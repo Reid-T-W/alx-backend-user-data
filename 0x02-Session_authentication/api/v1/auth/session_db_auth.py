@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Session saved to db """
-from api.v1.auth.session_auth import SessionExpAuth
+from api.v1.auth.session_exp_auth import SessionExpAuth
 from api.v1.views.users import User
 import uuid
 import os
