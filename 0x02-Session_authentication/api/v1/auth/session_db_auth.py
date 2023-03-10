@@ -10,12 +10,16 @@ from datetime import datetime, timedelta
 class SessionDBAuth(SessionExpAuth):
     """ Session With expiary date """
 
-
     def create_session(self, user_id=None):
         """ Overiding init """
+        session_id = super(user_id)
+
     def user_id_for_session_id(self, session_id=None):
         """ Overriding user_id_for_session_id"""
         ...
+        user_id = super(session_id)
+
     def destroy_session(self, request=None):
         """ Overridingdestroy_session """
         ...
+        destroyed_session = super(request)
