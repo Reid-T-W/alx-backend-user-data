@@ -5,6 +5,7 @@ from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models.user import User
 import os
+import sys
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
@@ -18,7 +19,6 @@ def login() -> str:
     # Get email and password
     email = request.form.get('email')
     password = request.form.get('password')
-
     if email is None:
         return jsonify({"error": "email missing"}), 400
 
