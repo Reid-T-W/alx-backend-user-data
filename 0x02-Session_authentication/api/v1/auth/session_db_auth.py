@@ -14,6 +14,8 @@ class SessionDBAuth(SessionExpAuth):
     def create_session(self, user_id=None):
         """ Overiding init """
         session_id = super().create_session(user_id)
+        if session_id is None:
+            return None
         self.user_session = UserSession(user_id=user_id,
                                         session_id=session_id)
         self.user_session.save()
