@@ -3,6 +3,8 @@
 """
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base
@@ -37,3 +39,16 @@ class DB:
         self.session.add(user)
         self.session.commit()
         return user
+
+    def find_user_by(self, **kwargs):
+        """ Searches for a user baesd on the given key """
+        self.session = self._session
+        try:
+            # for key, value in kwargs.items():
+            user = self.session.query(User).filter_by(**kwargs).first()
+            if user is None:
+                raise NoResultFound()
+            else:
+                return user
+        except InvalidRequestError:
+            raise InvalidRequestError()
