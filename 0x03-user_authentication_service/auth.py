@@ -20,7 +20,7 @@ class Auth:
         """ Initializer for Auth class """
         self._db = DB()
 
-    def register_user(self, email, password):
+    def register_user(self, email: str, password: str):
         """ Register a user """
         try:
             user = self._db.find_user_by(email=email)
