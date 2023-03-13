@@ -9,6 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base
 from user import User
+from typing import Dict
 
 
 class DB:
@@ -40,7 +41,7 @@ class DB:
         self.session.commit()
         return user
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
         """ Searches for a user baesd on the given key """
         self.session = self._session
         try:
@@ -53,7 +54,7 @@ class DB:
         except InvalidRequestError:
             raise InvalidRequestError()
 
-    def update_user(self, user_id, **kwargs):
+    def update_user(self, user_id, **kwargs: Dict[str, str]) -> None:
         """ Update details of a user """
         self.session = self._session
         try:
@@ -65,4 +66,3 @@ class DB:
         for attr, value in kwargs.items():
             setattr(user, attr, value)
         self.session.commit()
-        return None
