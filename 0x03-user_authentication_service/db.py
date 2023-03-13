@@ -41,18 +41,19 @@ class DB:
         self.session.commit()
         return user
 
-    def find_user_by(self, **kwargs: Dict[str, str]) -> User:
+    def find_user_by(self, **kwargs: Dict[any, str]) -> User:
         """ Searches for a user baesd on the given key """
         self.session = self._session
         try:
             # for key, value in kwargs.items():
             user = self.session.query(User).filter_by(**kwargs).first()
-            if user is None:
-                raise NoResultFound()
-            else:
-                return user
         except InvalidRequestError:
             raise InvalidRequestError()
+
+        if user is None:
+            raise NoResultFound()
+        else:
+            return user
 
     def update_user(self, user_id, **kwargs: Dict[str, str]) -> None:
         """ Update details of a user """
