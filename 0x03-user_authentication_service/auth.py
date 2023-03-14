@@ -79,5 +79,8 @@ class Auth:
         """ Destorys a users session given a user_id """
         if user_id is None:
             return None
-        self._db.update_user(user_id, session_id=None)
+        try:
+            self._db.update_user(user_id, session_id=None)
+        except ValueError:
+            pass
         return None
