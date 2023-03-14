@@ -45,7 +45,6 @@ class DB:
         """ Searches for a user baesd on the given key """
         _session = self._session
         try:
-            # for key, value in kwargs.items():
             user = _session.query(User).filter_by(**kwargs).first()
         except InvalidRequestError:
             raise InvalidRequestError()
