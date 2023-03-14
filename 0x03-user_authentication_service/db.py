@@ -35,21 +35,18 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """ Add user to the database """
-        # self.session = self._session
         _session = self._session
         user = User(email=email, hashed_password=hashed_password)
-        # self.session.add(user)
         _session.add(user)
-        # self.session.commit()
         _session.commit()
         return user
 
     def find_user_by(self, **kwargs: Dict[any, str]) -> User:
         """ Searches for a user baesd on the given key """
-        self.session = self._session
+        _session = self._session
         try:
             # for key, value in kwargs.items():
-            user = self.session.query(User).filter_by(**kwargs).first()
+            user = _session.query(User).filter_by(**kwargs).first()
         except InvalidRequestError:
             raise InvalidRequestError()
 
