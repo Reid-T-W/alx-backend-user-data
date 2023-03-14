@@ -66,3 +66,4 @@ class DB:
         for attr, value in kwargs.items():
             setattr(user, attr, value)
         _session.commit()
+        return None
