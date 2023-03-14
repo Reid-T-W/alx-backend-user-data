@@ -65,7 +65,7 @@ class DB:
         except InvalidRequestError:
             raise ValueError()
         return None
-    
+
     # def update_user(self, user_id, **kwargs: str) -> None:
     #     """ Update details of a user """
     #     _session = self._session
