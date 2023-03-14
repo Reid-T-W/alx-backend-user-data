@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ Route module for app """
 from flask import Flask, jsonify, request, abort, make_response, request
+from requests import Response
 from auth import Auth
 
 
@@ -28,7 +29,7 @@ def register_user() -> str:
 
 
 @app.route('/sessions', methods=['POST'])
-def login() -> str:
+def login() -> Response:
     """ Route for user login """
     email = request.form.get('email')
     password = request.form.get('password')
