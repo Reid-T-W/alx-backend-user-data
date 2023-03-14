@@ -53,7 +53,7 @@ class DB:
         else:
             return user
 
-    def update_user(self, user_id, **kwargs: str) -> None:
+    def update_user(self, user_id, **kwargs) -> None:
         """ Update details of a user """
         _session = self._session
         try:
