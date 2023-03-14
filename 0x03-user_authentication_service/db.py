@@ -61,12 +61,11 @@ class DB:
             user = self.find_user_by(id=user_id)
         except NoResultFound:
             # print("Not found")
-            raise NoResultFound()
+            raise ValueError()
         for attr, value in kwargs.items():
             # Checking if the attribute is valid
             if vars(user).get(attr):
                 setattr(user, attr, value)
-                _session.add(user)
                 _session.commit()
             else:
                 raise ValueError()
