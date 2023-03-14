@@ -54,9 +54,9 @@ class DB:
         else:
             return user
 
-    def update_user(self, user_id, **kwargs: Dict[str, str]) -> None:
+    def update_user(self, user_id, **kwargs: str) -> None:
         """ Update details of a user """
-        self.session = self._session
+        _session = self._session
         try:
             user = self.find_user_by(id=user_id)
         except NoResultFound:
@@ -65,4 +65,4 @@ class DB:
             print("Invalid")
         for attr, value in kwargs.items():
             setattr(user, attr, value)
-        self.session.commit()
+        _session.commit()
