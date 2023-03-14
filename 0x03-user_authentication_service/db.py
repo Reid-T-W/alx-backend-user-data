@@ -56,11 +56,7 @@ class DB:
     def update_user(self, user_id: str, **kwargs) -> None:
         """ Update details of a user """
         _session = self._session
-        try:
-            user = self.find_user_by(id=user_id)
-        except NoResultFound:
-            print("Not found")
-            return
+        user = self.find_user_by(id=user_id)
         for attr, value in kwargs.items():
             # Checking if the attribute is valid
             if vars(user).get(attr):
