@@ -41,7 +41,7 @@ class DB:
         _session.commit()
         return user
 
-    def find_user_by(self, **kwargs: Dict[any, str]) -> User:
+    def find_user_by(self, **kwargs: Dict) -> User:
         """ Searches for a user baesd on the given key """
         _session = self._session
         try:
