@@ -62,10 +62,10 @@ class DB:
         except NoResultFound:
             # print("Not found")
             raise NoResultFound
-        except InvalidRequestError:
-            # print("Invalid")
-            raise ValueError
         for attr, value in kwargs.items():
-            setattr(user, attr, value)
+            try:
+                setattr(user, attr, value)
+            except Exception:
+                raise ValueError
         _session.commit()
         return None
