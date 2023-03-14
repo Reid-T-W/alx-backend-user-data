@@ -61,11 +61,11 @@ class DB:
             user = self.find_user_by(id=user_id)
         except NoResultFound:
             # print("Not found")
-            raise NoResultFound
+            raise NoResultFound()
         for attr, value in kwargs.items():
             try:
                 setattr(user, attr, value)
             except Exception:
-                raise ValueError
+                raise ValueError()
         _session.commit()
         return None
