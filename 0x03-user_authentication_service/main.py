@@ -1,135 +1,52 @@
 #!/usr/bin/env python3
-# Task 0
-"""
-Main file
-
-from user import User
-
-print(User.__tablename__)
-
-for column in User.__table__.columns:
-    print("{}: {}".format(column, column.type))
-"""
-# Task 1
-"""
-Main file
+import requests
 
 
-from db import DB
-from user import User
-
-my_db = DB()
-
-user_1 = my_db.add_user("test@test.com", "SuperHashedPwd")
-print(user_1.id)
-
-user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
-print(user_2.id)
-"""
-# Task 2
-"""
-Main file
+def register_user(email: str, password: str) -> None:
+    pass
 
 
-from db import DB
-from user import User
-
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
+def log_in_wrong_password(email: str, password: str) -> None:
+    pass
 
 
-my_db = DB()
-
-user = my_db.add_user("test@test.com", "PwdHashed")
-print(user.id)
-
-find_user = my_db.find_user_by(email="test@test.com")
-print(find_user.id)
-
-try:
-    find_user = my_db.find_user_by(email="test2@test.com")
-    print(find_user.id)
-except NoResultFound:
-    print("Not found")
-
-try:
-    find_user = my_db.find_user_by(no_email="test@test.com")
-    print(find_user.id)
-except InvalidRequestError:
-    print("Invalid")
-"""
-
-# Task 3
-"""
-Main file
-
-from db import DB
-from user import User
-
-from sqlalchemy.exc import InvalidRequestError
-from sqlalchemy.orm.exc import NoResultFound
+def log_in(email: str, password: str) -> str:
+    pass
 
 
-my_db = DB()
+def profile_unlogged() -> None:
+    pass
 
-email = 'test@test.com'
-hashed_password = "hashedPwd"
 
-user = my_db.add_user(email, hashed_password)
-print(user.id)
+def profile_logged(session_id: str) -> None:
+    pass
 
-try:
-    my_db.update_user(user.id, hashed_password='NewPwd')
-    print("Password updated")
-except ValueError:
-    print("Error")
 
-"""
-# Task 4
-"""
-Main file
+def log_out(session_id: str) -> None:
+    pass
 
-from auth import _hash_password
 
-print(_hash_password("Hello Holberton"))
-"""
-# Task 5
-"""
-Main file
+def reset_password_token(email: str) -> str:
+    pass
 
-from auth import Auth
 
-email = 'me@me.com'
-password = 'mySecuredPwd'
+def update_password(email: str, reset_token: str, new_password: str) -> None:
+    pass
 
-auth = Auth()
 
-try:
-    user = auth.register_user(email, password)
-    print("successfully created a new user!")
-except ValueError as err:
-    print("could not create a new user: {}".format(err))
+EMAIL = "guillaume@holberton.io"
+PASSWD = "b4l0u"
+NEW_PASSWD = "t4rt1fl3tt3"
 
-try:
-    user = auth.register_user(email, password)
-    print("successfully created a new user!")
-except ValueError as err:
-    print("could not create a new user: {}".format(err))
-"""   
-# Task 8
-"""
-Main file
-"""
-from auth import Auth
 
-email = 'bob@bob.com'
-password = 'MyPwdOfBob'
-auth = Auth()
+if __name__ == "__main__":
 
-auth.register_user(email, password)
-
-print(auth.valid_login(email, password))
-
-print(auth.valid_login(email, "WrongPwd"))
-
-print(auth.valid_login("unknown@email", password))
+    register_user(EMAIL, PASSWD)
+    log_in_wrong_password(EMAIL, NEW_PASSWD)
+    profile_unlogged()
+    session_id = log_in(EMAIL, PASSWD)
+    profile_logged(session_id)
+    log_out(session_id)
+    reset_token = reset_password_token(EMAIL)
+    update_password(EMAIL, reset_token, NEW_PASSWD)
+    log_in(EMAIL, NEW_PASSWD)
