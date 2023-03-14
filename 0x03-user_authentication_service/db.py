@@ -60,9 +60,11 @@ class DB:
         try:
             user = self.find_user_by(id=user_id)
         except NoResultFound:
-            print("Not found")
+            # print("Not found")
+            raise NoResultFound
         except InvalidRequestError:
-            print("Invalid")
+            # print("Invalid")
+            raise ValueError
         for attr, value in kwargs.items():
             setattr(user, attr, value)
         _session.commit()
