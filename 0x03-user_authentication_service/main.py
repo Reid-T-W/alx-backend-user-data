@@ -30,6 +30,7 @@ print(user_2.id)
 """
 Main file
 
+
 from db import DB
 from user import User
 
@@ -57,6 +58,7 @@ try:
 except InvalidRequestError:
     print("Invalid")
 """
+
 # Task 3
 """
 Main file
@@ -94,7 +96,7 @@ print(_hash_password("Hello Holberton"))
 # Task 5
 """
 Main file
-"""
+
 from auth import Auth
 
 email = 'me@me.com'
@@ -112,4 +114,22 @@ try:
     user = auth.register_user(email, password)
     print("successfully created a new user!")
 except ValueError as err:
-    print("could not create a new user: {}".format(err))        
+    print("could not create a new user: {}".format(err))
+"""   
+# Task 8
+"""
+Main file
+"""
+from auth import Auth
+
+email = 'bob@bob.com'
+password = 'MyPwdOfBob'
+auth = Auth()
+
+auth.register_user(email, password)
+
+print(auth.valid_login(email, password))
+
+print(auth.valid_login(email, "WrongPwd"))
+
+print(auth.valid_login("unknown@email", password))
