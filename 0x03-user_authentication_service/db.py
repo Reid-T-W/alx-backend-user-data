@@ -63,9 +63,10 @@ class DB:
             # print("Not found")
             raise NoResultFound()
         for attr, value in kwargs.items():
-            try:
+            # Checking if the attribute is valid
+            if vars(user).get(attr):
                 setattr(user, attr, value)
-            except Exception:
+            else:
                 raise ValueError()
         _session.commit()
         return None
