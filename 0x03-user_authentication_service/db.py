@@ -59,14 +59,26 @@ class DB:
         _session = self._session
         try:
             user = self.find_user_by(id=user_id)
-        except NoResultFound:
-            # print("Not found")
-            raise ValueError()
-        for attr, value in kwargs.items():
-            # Checking if the attribute is valid
-            if vars(user).get(attr):
+            for attr, value in kwargs.items():
                 setattr(user, attr, value)
                 _session.commit()
-            else:
-                raise ValueError()
+        except InvalidRequestError:
+            raise ValueError()
         return None
+    
+    # def update_user(self, user_id, **kwargs: str) -> None:
+    #     """ Update details of a user """
+    #     _session = self._session
+    #     try:
+    #         user = self.find_user_by(id=user_id)
+    #     except NoResultFound:
+    #         # print("Not found")
+    #         raise ValueError()
+    #     for attr, value in kwargs.items():
+    #         # Checking if the attribute is valid
+    #         if vars(user).get(attr):
+    #             setattr(user, attr, value)
+    #             _session.commit()
+    #         else:
+    #             raise ValueError()
+    #     return None
