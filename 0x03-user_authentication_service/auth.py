@@ -62,4 +62,4 @@ class Auth:
             self._db.update_user(user.id, session_id=session_id)
         except ValueError:
             return None
-        return session_id
+        return user.session_id
