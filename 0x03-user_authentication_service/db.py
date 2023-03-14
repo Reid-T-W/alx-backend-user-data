@@ -66,7 +66,7 @@ class DB:
             # Checking if the attribute is valid
             if vars(user).get(attr):
                 setattr(user, attr, value)
+                _session.commit()
             else:
                 raise ValueError()
-        _session.commit()
         return None
